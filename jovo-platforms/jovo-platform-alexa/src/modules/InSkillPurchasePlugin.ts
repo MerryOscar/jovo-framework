@@ -241,9 +241,14 @@ export class InSkillPurchasePlugin implements Plugin {
             alexaSkill.$response = new AlexaResponse();
         }
         if (_get(output, 'Alexa.Isp')) {
+          if (!alexaSkill.$response.response.directives) {
             _set(alexaSkill.$response, 'response.directives',
                 [_get(output, 'Alexa.Isp')]
             );
+          }
+          else {
+            alexaSkill.$response.response.directives.push(_get(output, 'Alexa.Isp'));
+          }
         }
     }
 }
